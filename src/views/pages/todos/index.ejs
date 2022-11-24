@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head.ejs') %> 
+<%- include('../../partials/header.ejs') %> 
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-end">
+            <div class="col-3">
+                <a href="/todos/create" class="btn btn-primary w-100">Create</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% todos.forEach(function(todo){ %>
+                                <tr>
+                                    <td> <%= todo.todo %></td>
+                                    <td> <a href="/todos/<%= todo.id %>" class="btn btn-primary btn-xs">Edit</a></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>        
+        </div>
+    </div>
+<%- include('../../partials/footer') %> 
+</body>
+</html>
