@@ -4,7 +4,7 @@
 <%- include('../../partials/header.ejs') %> 
 <body>
     <div class="container my-5">
-        <div class="row justify-content-end">
+        <div class="row justify-content-end mb-3">
             <div class="col-3">
                 <a href="/todos/create" class="btn btn-primary w-100">Create</a>
             </div>
@@ -15,15 +15,21 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th></th>
+                            <td scope="col">#ID</td>
+                            <th scope="col">Todo</th>
+                            <th scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                             <% todos.forEach(function(todo){ %>
                                 <tr>
+                                    <td><%= todo.id %></td>
                                     <td> <%= todo.todo %></td>
-                                    <td> <a href="/todos/<%= todo.id %>" class="btn btn-primary btn-xs">Edit</a></td>
+                                    <td class="d-flex"> <a href="/todos/<%= todo.id %>" class="btn btn-primary btn-sm">Edit</a>&nbsp;
+                                        <form action="/todos/<%=todo.id%>?_method=DELETE" method="POST">
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <% }); %>
                         </tbody>

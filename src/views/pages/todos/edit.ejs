@@ -9,7 +9,7 @@
                 <div class="card-title text-center text-primary">
                     Edit Todo
                 </div>
-                <form action="/todos" method="POST">
+                <form action="/todos/<%= todo.id %>?_method=PUT" method="POST">
                     <input type="hidden" name="_method" value="PUT">
                     <div class="row">
                         <div class="mb-3 col-6">

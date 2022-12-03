@@ -7,7 +7,7 @@ const index = async (req, res) => {
   });
 };
 
-const create = async (req, res) => {
+const create = (req, res) => {
   res.render("pages/todos/create");
 };
 
@@ -29,13 +29,16 @@ const edit = async (req, res) => {
 
 const update = async (req, res) => {
   const todoId = req.params.id;
-  await Todo.findByIdAndUpdate(todoId, { todo: req.body.todo });
-  console.log(Todo.id, todoId);
+  await Todo.findByIdAndUpdate(todoId, { todo: req.body.todo }).exec();
 
-  res.redirect("/todos/".todoId);
+  res.redirect("/todos");
 };
 
-const destroy = (req, res) => {};
+const destroy = (req, res) => {
+  const todoId = req.params.id;
+  Todo.findByIdAndRemove(todoId).exec();
+  res.redirect("/todos");
+};
 
 module.exports.index = index;
 module.exports.store = store;
