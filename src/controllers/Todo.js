@@ -1,4 +1,5 @@
 const Todo = require("../models/Todo");
+const { validationResult } = require('express-validator');
 
 const index = async (req, res) => {
   let todos = await Todo.find({});
@@ -12,6 +13,10 @@ const create = (req, res) => {
 };
 
 const store = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const todo = new Todo({ todo: req.body.todo });
   try {
     await todo.save();
