@@ -15,11 +15,13 @@ const create = (req, res) => {
 const store = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    req.flash("error", errors.errors[0].msg);
+    return res.redirect("back");
   }
   const todo = new Todo({ todo: req.body.todo });
   try {
     await todo.save();
+    req.flash("success", "Todo saved!");
     res.redirect("/todos");
   } catch (err) {
     res.redirect("/todos");
@@ -33,9 +35,14 @@ const edit = async (req, res) => {
 };
 
 const update = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash("error", errors.errors[0].msg);
+    return res.redirect("back");
+  }
   const todoId = req.params.id;
   await Todo.findByIdAndUpdate(todoId, { todo: req.body.todo }).exec();
-
+  req.flash("success", "Todo updated!");
   res.redirect("/todos");
 };
 

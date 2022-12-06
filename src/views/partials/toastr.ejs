@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">  
+    <%_ if(typeof error !== "undefined" && error != ''){ _%>
+    <script>
+        $(document).ready(function(){
+            toastr.error("<%= error %>")
+        })
+    </script>
+    <%_ } _%>
+    <%_ if(typeof success !== "undefined" && success != ''){ _%>
+        <script>
+            $(document).ready(function(){
+                toastr.success("<%= success %>")
+            })
+        </script>
+        <%_ } _%>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
